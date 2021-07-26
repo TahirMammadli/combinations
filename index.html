@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="float-container">
+      <h3>How many fields would you like to add?</h3>
+      <input type="number" id="inputNum" />
+      <button id="addBtn" onclick="addBtn();">Add</button>
+    </div>
+
+    <!-- <div id="inputs">
+      <input type="text" />
+      <input type="text" />
+      <input type="text" />
+      <button>Add</button>
+    </div> -->
+
+    <script>
+      let divInputBtn = document.createElement("div");
+      function addBtn() {
+        let numOfInputs = document.getElementById("inputNum").value;
+
+        for (let i = 0; i < numOfInputs; i++) {
+          addInput();
+        }
+      }
+
+      function addInput() {
+        let div = document.createElement("div");
+
+        let body = document.getElementsByTagName("body")[0];
+        div.id = "inputs";
+        div.innerHTML = "<input type='text'>";
+
+        body.appendChild(div);
+      }
+
+      let body = document.getElementsByTagName("body")[0];
+      const btn = document.createElement("button");
+      btn.innerText = "Add Values";
+      divInputBtn.appendChild(btn);
+      body.appendChild(divInputBtn);
+
+      btn.addEventListener("click", doSomething);
+
+      function getValues() {
+        return Array.from(
+          document.querySelectorAll("#inputs > input"),
+          ({ value }) => value.split(",")
+        );
+      }
+
+      function doSomething() {
+        const arrays = getValues();
+        //console.log(row1, row2, row3);
+        combinations(arrays);
+      }
+
+      let newArr = [];
+
+      function combinations(arrays) {
+        for (let i = 0; i < arrays[0].length; i++) {
+          for (let j = 0; j < arrays[1].length; j++) {
+            for (let k = 0; k < arrays[2].length; k++) {
+                for (let m = 0; m < arrays[3].length; m++) {
+              if (i <= arrays[0].length && j < arrays[1].length && j < arrays[2].length && j < arrays[3].length) {
+                newArr.push(arrays[0][i], arrays[1][j], arrays[2][k], arrays[3][k]);
+              }
+            }
+          }
+        }
+        function chunkArray(myArray, chunk_size) {
+          var index = 0;
+          var arrayLength = myArray.length;
+          var tempArray = [];
+          let myChunk = [];
+
+          for (index = 0; index < arrayLength; index += chunk_size) {
+            myChunk = myArray.slice(index, index + chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+          }
+          return tempArray;
+        }
+
+        var result = chunkArray(newArr, 3);
+
+        //console.log(newArr);
+      }
+      console.log(result);
+
+    }
+    </script>
+  </body>
+</html>
